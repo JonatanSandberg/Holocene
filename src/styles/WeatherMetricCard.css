@@ -1,0 +1,31 @@
+.weather-metric-card {
+    border: 1px solid #ccc;
+    max-width: 550px;;
+    padding: 6px;
+    border-radius: 8px;
+    cursor: pointer; /* Makes it clear the card is clickable */
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .weather-metric-card:hover {
+    transform: scale(1.05); /* Adds hover effect for better interactivity */
+  }
+  
+  .metric-image {
+    width: 527.8px;
+    height: 351.9px;
+    border-radius: 8px;
+  }
+  
+  .weather-metric-card h3 {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: black;
+  }
+  
+  .weather-metric-card p {
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  

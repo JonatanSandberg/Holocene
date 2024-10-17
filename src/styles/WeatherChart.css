@@ -1,0 +1,81 @@
+/* Grundläggande stil för diagramområdet */
+.chart-container {
+  width: 100%;
+  margin: auto; /* Centrerar diagrammet */
+  padding: 20px; /* Lägger till lite padding */
+  background-color: #f9f9f9; /* Ljus bakgrundsfärg */
+  border: 1px solid #ddd; /* Lätt gräns runt diagrammet */
+  border-radius: 8px; /* Rundade hörn */
+}
+
+/* Stil för diagramrubriken */
+.chart-title {
+  text-align: center; /* Centrerar rubriken */
+  font-size: 1.5rem; /* Större textstorlek */
+  margin-bottom: 10px; /* Avstånd under rubriken */
+}
+
+/* Färger för olika diagramtyper */
+.line {
+  stroke: var(--line-color, rgba(75, 192, 192, 1)); /* Linjefärg */
+  fill: var(--line-fill-color, rgba(75, 192, 192, 0.2)); /* Fyllnadsfärg under linjen */
+}
+
+.bar {
+  background-color: var(--bar-fill-color, rgba(153, 102, 255, 0.2)); /* Staplarfärg */
+  border-color: var(--bar-border-color, rgb(87, 8, 244)); /* Staplargräns */
+}
+
+/* Färger för olika dataset */
+.temperature-mean {
+  stroke: rgba(75, 192, 192, 1);
+  fill: rgba(75, 192, 192, 0.2);
+}
+
+.temperature-max {
+  stroke: rgba(255, 99, 132, 1);
+  fill: rgba(255, 99, 132, 0.2);
+}
+
+.wind-speed {
+  stroke: rgba(54, 162, 235, 1);
+  fill: rgba(54, 162, 235, 0.2);
+}
+
+.pressure {
+  stroke: rgba(255, 206, 86, 1);
+  fill: rgba(255, 206, 86, 0.2);
+}
+
+.precipitation {
+  background-color: rgba(153, 102, 255, 0.2);
+  border-color: rgb(82, 11, 224);
+}
+
+.rain {
+  background-color: rgba(75, 192, 192, 0.2);
+  border-color: rgba(75, 192, 192, 1);
+}
+
+.evapotranspiration {
+  background-color: rgba(255, 206, 86, 0.2);
+  border-color: rgba(255, 206, 86, 1);
+}
+
+.soil-moisture {
+  background-color: rgba(255, 159, 64, 0.2);
+  border-color: rgba(255, 159, 64, 1);
+}
+
+/* Används för att dölja diagrammet medan det laddas */
+.loading {
+  display: flex; /* Flexbox för centrering */
+  justify-content: center; /* Centrerar horisontellt */
+  align-items: center; /* Centrerar vertikalt */
+  height: 100%; /* Full höjd */
+  font-size: 1.2rem; /* Textstorlek */
+}
+
+
+  
+  

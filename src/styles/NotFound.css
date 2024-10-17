@@ -1,0 +1,56 @@
+.error-main {
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/artem-sapegin-8c6eS43iq1o-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    z-index: 1;
+    position: relative;
+    /* Ensure no overflow is hidden inside containers */
+    overflow: auto;
+}
+
+
+.quote {
+    font-size: 28px; /* Increased font size for better visibility */
+    font-style: italic;
+    font-weight: 600;
+    color: #fff; /* Change text color for better contrast */
+    background-color: rgba(35, 255, 185, 0.8); /* Semi-transparent background for emphasis */
+    padding: 20px;
+    border-radius: 18px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 80%;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+    position: relative; /* Ensure the quote has its own stacking context */
+    z-index: 1; /* Make sure it appears above the background */
+}
+
+.homeLink {
+    margin-top: 20px;
+    padding: 12px 25px; /* Increased padding for a better button */
+    border-radius: 18px;
+    background-color: #ff4d00; /* Bright orange for visibility */
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px; /* Slightly larger font for better readability */
+    transition: background-color 0.3s; /* Transition effect on hover */
+}
+
+.homeLink:hover {
+    background-color: #e03e00; /* Darker shade on hover */
+}
+
+
+
+
+
+

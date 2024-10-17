@@ -1,0 +1,78 @@
+.tribe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px; /* Justerat gap för att ge mer utrymme mellan korten */
+  margin: 40px 16px 16px; /* Justera toppmarginalen här */
+}
+
+.favorites-header {
+  margin-bottom: 40px; /* Skapa utrymme mellan header och kort */
+  text-align: center; /* Centrerar texten i headern */
+}
+
+/* Back button style */
+.goback-btn {
+  background-color: #FF5722; /* Rödorange färg */
+  color: white; /* Vit textfärg */
+  border: none; /* Ingen kantlinje */
+  border-radius: 4px; /* Rundade hörn */
+  padding: 10px 20px; /* Utrymme runt texten */
+  cursor: pointer; /* Handpekare vid hover */
+  font-size: 16px; /* Justera textstorlek */
+  margin-top: 60px; /* Utrymme ovanför knappen */
+  transition: background-color 0.3s ease; /* Mjuk övergångseffekt */
+}
+
+.goback-btn:hover {
+  background-color: #E64A19; /* Mörkare nyans vid hover */
+}
+
+/* tribe-card */
+.tribe-card {
+  border: 1px solid #022b06;
+  border-radius: 8px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgb(113, 202, 166);
+  transition: transform 0.3s ease;
+}
+
+.tribe-card:hover {
+  transform: translateY(-10px);
+}
+
+.tribe-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover; /* Fortsätt att fylla hela ytan */
+  object-position: top; /* Visar den översta delen av bilden */
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+h1 {
+  margin-bottom: 20px; /* Justera denna siffra efter behov */
+}
+
+h3 {
+  font-size: 18px;
+  margin: 8px 0;
+  font-weight: bold;
+}
+
+p {
+  font-size: 14px;
+  margin: 8px 0;
+  color: #555;
+}
+
+.remove-btn {
+  background-color: #FF5722;
+}
+
+.remove-btn:hover {
+  background-color: #0e011a; /* Mörkare nyans vid hover */
+}
+
+
