@@ -1,20 +1,18 @@
-import { Link } from 'react-router-dom';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Suspense, lazy } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Globe from 'globe.gl';
 import tribesData from '../data/tribesData';
-import { useNavigate } from 'react-router-dom';
 import earthBlue from '../assets/earthBlue.jpg';
 import earthTopology from '../assets/earthTopology.png';
 import nightSky from '../assets/nightSky.png';
 import '../styles/TribeGlobe.css';
 import Footer from './Footer';
+import logo from '../assets/logo.svg';
 
-interface TribeGlobeProps {
+const TribeGlobe: React.FC<{
   onTribeClick: (tribeName: string) => void;
-  onWeatherDataFetch: (coordinates: [number, number]) => void; // Add this prop to fetch weather data
-}
-
-const TribeGlobe: React.FC<TribeGlobeProps> = ({ onTribeClick, onWeatherDataFetch }) => {
+  onWeatherDataFetch: (coordinates: [number, number]) => void;
+}> = ({ onTribeClick, onWeatherDataFetch }) => {
   const globeRef = useRef<HTMLDivElement>(null);
   const globeInstance = useRef<any>(null);
   const navigate = useNavigate();
@@ -30,10 +28,7 @@ const TribeGlobe: React.FC<TribeGlobeProps> = ({ onTribeClick, onWeatherDataFetc
         .pointOfView({ lat: 20, lng: 0, altitude: 2 })
         .showAtmosphere(true)
         .atmosphereColor('lightblue')
-        .atmosphereAltitude(0.25);
-
-      // Add markers for tribes
-      world
+        .atmosphereAltitude(0.25)
         .pointsData(tribesData)
         .pointLat((tribe) => tribe.coords[0])
         .pointLng((tribe) => tribe.coords[1])
@@ -44,22 +39,11 @@ const TribeGlobe: React.FC<TribeGlobeProps> = ({ onTribeClick, onWeatherDataFetc
         .onPointClick((tribe) => {
           onTribeClick(tribe.name);
           navigate(`/tribe/${tribe.name}`);
-
-          // Fetch weather data if function is provided
-          if (onWeatherDataFetch) {
-            onWeatherDataFetch(tribe.coords);
-          }
+          onWeatherDataFetch(tribe.coords);
+        })
+        .onGlobeClick((lat, lng) => {
+          onWeatherDataFetch([lat, lng]);
         });
-
-      // Handle globe click event
-      world.onGlobeClick((lat, lng) => {
-        console.log('Globe clicked at:', lat, lng);
-        
-        // Fetch weather data based on clicked coordinates
-        if (onWeatherDataFetch) {
-          onWeatherDataFetch([lat, lng]); // Pass clicked coordinates
-        }
-      });
 
       globeInstance.current = world;
     }
@@ -69,43 +53,49 @@ const TribeGlobe: React.FC<TribeGlobeProps> = ({ onTribeClick, onWeatherDataFetc
         globeInstance.current.width(window.innerWidth).height(window.innerHeight);
       }
     };
-    window.addEventListener('resize', handleResize);
 
-    return () => window.removeEventListener('resize', handleResize);
+    // Debounce the resize event handler
+    const debouncedHandleResize = debounce(handleResize, 200);
+    window.addEventListener('resize', debouncedHandleResize);
+
+    return () => window.removeEventListener('resize', debouncedHandleResize);
   }, [onTribeClick, onWeatherDataFetch, navigate]);
 
+  // Debounce function to limit the rate at which a function can fire
+  const debounce = (func: Function, wait: number) => {
+    let timeout: NodeJS.Timeout;
+    return function executedFunction(...args: any) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
+  };
+
   return (
-    <>
+    <Suspense fallback={<div>Loading globe...</div>}>
       <div ref={globeRef} className="globe-container" />
-      <h1 className="header">HOLOCENE</h1>
-      <h2 className="subheader">Embark on a Quest for the Things Called Tribes</h2>
-      <button
-        onClick={() => {
-          console.log('Navigating to /favorites');
-          navigate('/favorites');
-        }}
-        className="favorites-link"
-      >
-        FAVORITES
-      </button>
-
-      <button
-        onClick={() => {
-          console.log('Navigating to /about');
-          navigate('/about');
-        }}
-        className="about-link"
-      >
-        ABOUT
-      </button>
-
-      {/* Footer component */}
-      <Footer /> {/* Lägg till footern längst ner */}
-    </>
+      <h1 className="header">
+        <img src={logo} alt="Logo" className="logo" loading="lazy" />
+        HOLOCENE
+      </h1>
+      <h2 className="subheader">Interweaving Climate Models with Indigenous Experiences</h2>
+      <button onClick={() => navigate('/favorites')} className="favorites-link">FAVORITES</button>
+      <button onClick={() => navigate('/about')} className="about-link">ABOUT</button>
+      <button onClick={() => navigate('/quiz')} className="quiz-link">QUIZ</button>
+      <Footer />
+    </Suspense>
   );
 };
 
 export default TribeGlobe;
+
+
+
+
+
 
 
 

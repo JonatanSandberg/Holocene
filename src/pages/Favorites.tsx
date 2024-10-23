@@ -1,10 +1,10 @@
-/* src/pages/Favorites.tsx */
 import React from 'react';
-import { useFavorites } from '../context/FavoritesContext'; // Hämta favoriter från kontext
+import { useFavorites } from '../context/FavoritesContext';
 import FavoriteAnimation from '../assets/FavoriteAnimation.json';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Favorites.css';
+import logo from '../assets/logo.svg';
 
 interface Tribe {
   name: string;
@@ -12,22 +12,24 @@ interface Tribe {
 }
 
 const FavoritesPage: React.FC = () => {
-  const { favorites, removeFavorite } = useFavorites(); // Hämta favoriter och borttagning från context
-  const navigate = useNavigate(); // Navigering bakåt
+  const { favorites, removeFavorite } = useFavorites();
+  const navigate = useNavigate();
 
-  console.log(favorites); // Felsökning: logga favoriter i konsolen
-
-  // Function to navigate to the TribeArticle page
   const handleLearnMore = (tribe: Tribe) => {
-    navigate(`/tribe/${tribe.name}`, { state: { tribe } }); // Pass tribe data as state
+    navigate(`/tribe/${tribe.name}`, { state: { tribe } });
   };
 
   return (
     <main className="main-favorites">
       <header className="favorites-header">
-        <h1 className="header">FAVORITE TRIBES</h1>
-        <button onClick={() => navigate(-1)} className="goback-btn">RETURN</button>
+        <h1 className="header">
+          <img src={logo} alt="Logo" className="logo" />
+          FAVORITE TRIBES
+        </h1>
       </header>
+      <div className="button-container">
+        <button onClick={() => navigate(-1)} className="goback-btn">RETURN</button>
+      </div>
 
       <section className="content-container">
         {favorites.length === 0 ? (
@@ -53,7 +55,6 @@ const FavoritesPage: React.FC = () => {
                   >
                     Remove
                   </button>
-                  {/* Learn More button */}
                   <button
                     className="learn-more-btn"
                     onClick={() => handleLearnMore(tribe)}
@@ -71,6 +72,9 @@ const FavoritesPage: React.FC = () => {
 };
 
 export default FavoritesPage;
+
+
+
 
 
 

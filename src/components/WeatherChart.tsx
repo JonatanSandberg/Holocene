@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-import '../styles/WeatherChart.css'; // Importera CSS-filen
+import '../styles/WeatherChart.css';
 
 Chart.register(...registerables);
 
@@ -22,23 +22,21 @@ interface WeatherData {
 
 interface WeatherChartProps {
   weatherData: WeatherData;
-  selectedMetric: string; // Ny prop för vald metric
+  selectedMetric: string;
+  tribeName: string;
 }
 
-const WeatherChart: React.FC<WeatherChartProps> = ({ weatherData, selectedMetric }) => {
+const WeatherChart: React.FC<WeatherChartProps> = ({ weatherData, selectedMetric, tribeName }) => {
   const chartRef = useRef<HTMLCanvasElement | null>(null);
-  const chartInstanceRef = useRef<Chart | null>(null); // Enkel diagraminstans nu
+  const chartInstanceRef = useRef<Chart | null>(null);
 
   useEffect(() => {
-    // Rensa den befintliga diagraminstansen innan en ny skapas
     if (chartInstanceRef.current) {
       chartInstanceRef.current.destroy();
     }
 
-    // Se till att weatherData är definierad och har nödvändig struktur
     if (!weatherData || !weatherData.daily) return;
 
-    // Skapa en diagramkonfiguration baserat på vald metric
     let chartConfig: any = null;
 
     switch (selectedMetric) {
@@ -66,8 +64,8 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ weatherData, selectedMetric
                   : selectedMetric === 'wind_speed_10m_mean'
                   ? weatherData.daily.windSpeed10mMean
                   : weatherData.daily.pressureMslMean,
-                borderColor: `var(--${selectedMetric})`, // Använd CSS-variabel för färg
-                backgroundColor: 'rgba(0, 0, 0, 0)', // Transparent bakgrund
+                borderColor: `var(--${selectedMetric})`,
+                backgroundColor: 'rgba(0, 0, 0, 0)',
               },
             ],
           },
@@ -111,7 +109,8 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ weatherData, selectedMetric
                   : selectedMetric === 'et0_fao_evapotranspiration_sum'
                   ? weatherData.daily.et0FaoEvapotranspirationSum
                   : weatherData.daily.soilMoisture0To10cmMean,
-                backgroundColor: `var(--${selectedMetric})`, // Använd CSS-variabel för färg
+                backgroundColor: `var(--${selectedMetric})`,
+                borderColor: 'rgba(0, 0, 0, 0)',
               },
             ],
           },
@@ -127,9 +126,8 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ weatherData, selectedMetric
 
       case 'temperature_2m_min':
       case 'relative_humidity_2m_mean':
-        // Använd linje- eller stapeldiagram för dessa metrik
         chartConfig = {
-          type: 'line', // Använd linjediagram för min temperatur och relativ fuktighet
+          type: 'line',
           data: {
             labels: weatherData.daily.time.map(date => date.toISOString().split('T')[0]),
             datasets: [
@@ -138,8 +136,8 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ weatherData, selectedMetric
                 data: selectedMetric === 'temperature_2m_min'
                   ? weatherData.daily.temperature2mMin
                   : weatherData.daily.relativeHumidity2mMean,
-                borderColor: `var(--${selectedMetric})`, // Använd CSS-variabel för färg
-                backgroundColor: 'rgba(0, 0, 0, 0)', // Transparent bakgrund
+                borderColor: `var(--${selectedMetric})`,
+                backgroundColor: 'rgba(0, 0, 0, 0)',
               },
             ],
           },
@@ -157,7 +155,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ weatherData, selectedMetric
           },
         };
         break;
-        
+
       default:
         break;
     }
@@ -169,23 +167,29 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ weatherData, selectedMetric
       }
     }
 
-    // Rensningsfunktion för att förstöra diagraminstansen
     return () => {
       if (chartInstanceRef.current) {
         chartInstanceRef.current.destroy();
       }
     };
-  }, [weatherData, selectedMetric]); // Kör om effekten när selectedMetric ändras
+  }, [weatherData, selectedMetric]);
 
   return (
     <div className="chart-container">
-      <h4 className="chart-title">Weather Chart for {selectedMetric}</h4>
+      <h4>Weather Chart for {tribeName}, {selectedMetric}</h4>
       <canvas ref={chartRef} />
     </div>
   );
 };
 
 export default WeatherChart;
+
+
+
+
+
+
+
 
 
 

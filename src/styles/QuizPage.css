@@ -1,0 +1,203 @@
+.quiz-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #0f0f0f;
+  color: #00ffcc;
+}
+
+.difficulty-selection {
+  text-align: center;
+  border: 3px solid #00ffcc;
+  padding: 20px;
+  box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.difficulty-selection h2 {
+  color: #ff00cc;
+  text-shadow: 2px 2px 0px #000;
+  padding-bottom: 10px;
+}
+
+.difficulty-selection button {
+  background-color: #00ffcc;
+  color: #0f0f0f;
+  border: 2px solid #ff00cc;
+  padding: 12px 24px;
+  margin: 10px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 0;
+  box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.difficulty-selection button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ff00cc, 0 0 40px #ff00cc;
+}
+
+.question-section p {
+  font-size: 1rem;
+  color: #fff;
+  text-shadow: 0px 0px 5px #00ffcc;
+}
+
+.question-section h3 {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.answer-section button {
+  background-color: #ff00cc;
+  color: #0f0f0f;
+  border: 2px solid #00ffcc;
+  padding: 12px 24px;
+  margin: 10px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 0;
+  box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.answer-section button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc;
+}
+
+.answer-section button.correct-answer {
+  background-color: #00ff66;
+  box-shadow: 0 0 15px #00ff66, 0 0 30px #00ff66;
+  animation: correctAnimation 3s ease-in-out;
+}
+
+.answer-section button.wrong-answer {
+  background-color: #ff3333;
+  box-shadow: 0 0 15px #ff3333, 0 0 30px #ff3333;
+  animation: wrongAnimation 3s ease-in-out;
+}
+
+@keyframes correctAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes wrongAnimation {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  50% { transform: translateX(8px); }
+  100% { transform: translateX(0); }
+}
+
+.score-section {
+  font-size: 28px;
+  font-weight: bold;
+  color: #00ffcc;
+  text-shadow: 0px 0px 8px #00ffcc;
+  border: 2px solid #ff00cc;
+  padding: 10px;
+  margin-top: 15px;
+}
+
+.score-bar {
+  background-color: #222;
+  border: 2px solid #00ffcc;
+  border-radius: 0;
+  height: 24px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.score-fill {
+  background-color: #00ff66;
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.explanation-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 15px;
+  padding: 20px;
+  border: 2px solid #00ffcc;
+  background-color: #030000;
+  height: 250px;
+  box-shadow: 0 0 10px #00ffcc, 0 0 20px #ff00cc;
+  text-align: center;
+}
+
+.explanation-section p {
+  margin: 0;
+  padding: 10px 0;
+  color: #fff;
+}
+
+.explanation-section button {
+  background-color: #26e400;
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.explanation-section button:hover {
+  background-color: #f91d00;
+  transform: scale(1.1);
+}
+
+.quit-button, .restart-button {
+  background-color: #00ffcc;
+  color: #0f0f0f;
+  border: 2px solid #ff00cc;
+  padding: 12px 24px;
+  margin: 20px 10px;
+  font-family: inherit;
+  cursor: pointer;
+  border-radius: 0;
+  box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.quit-button:hover, .restart-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #ff00cc, 0 0 40px #ff00cc;
+}
+
+.quit-button {
+  background-color: #ff3333;
+  border-color: #ff0000;
+}
+
+.restart-button {
+  background-color: #00ff66;
+  border-color: #00ff00;
+}
+
+
+
+
+
+
+
+
+
+  
+  

@@ -1,31 +1,39 @@
 .weather-metric-card {
-    border: 1px solid #ccc;
-    max-width: 550px;;
-    padding: 6px;
-    border-radius: 8px;
-    cursor: pointer; /* Makes it clear the card is clickable */
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .weather-metric-card:hover {
-    transform: scale(1.05); /* Adds hover effect for better interactivity */
-  }
-  
-  .metric-image {
-    width: 527.8px;
-    height: 351.9px;
-    border-radius: 8px;
-  }
-  
-  .weather-metric-card h3 {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    color: black;
-  }
-  
-  .weather-metric-card p {
-    font-size: 1rem;
-    color: #666;
-  }
+  background: #fff9e5;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.metric-image {
+  width: 100%;
+  height: auto;
+  max-height: 195px;
+  object-fit: cover;
+}
+
+.weather-metric-card:hover {
+  transform: scale(1.05);
+}
+
+h3, p {
+  padding: 8px;
+  margin: 0;
+}
+
+.weather-metric-card h3 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: black;
+}
+
+.weather-metric-card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+
+
   
   

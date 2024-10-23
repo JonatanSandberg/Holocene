@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import tribesData from '../data/tribesData'; // Tribe data
+import tribesData from '../data/tribesData';
 import { useFavorites } from '../context/FavoritesContext';
 import '../styles/TribeCard.css';
 
-// Interface for TribeCardProps
 interface TribeCardProps {
   name: string;
   imageUrl: string;
   region: string;
-  coordinates: { lat: number; lon: number }; // Coordinates type
+  coordinates: { lat: number; lon: number };
 }
 
-// WeatherData interface matching your data structure
 interface WeatherData {
   temperature2mMean: number[];
   temperature2mMax: number[];
@@ -22,9 +20,9 @@ interface WeatherData {
 }
 
 const TribeCard: React.FC<TribeCardProps> = () => {
-  const { tribeName } = useParams<{ tribeName: string }>(); // Hämta tribeName från URL-parametrarna
-  const tribe = tribesData.find((tribe) => tribe.name === tribeName); // Hitta stammen baserat på URL-parametrarna
-  const coordinates = tribe ? tribe.coords : null; // Få koordinater om stammen finns
+  const { tribeName } = useParams<{ tribeName: string }>();
+  const tribe = tribesData.find((tribe) => tribe.name === tribeName);
+  const coordinates = tribe?.coords;
 
   const { favorites, setFavorites, removeFavorite } = useFavorites();
   const [isFavorited, setIsFavorited] = useState(false);
@@ -39,18 +37,16 @@ const TribeCard: React.FC<TribeCardProps> = () => {
     }
   }, [favorites, tribe]);
 
-  // Funktion för att hämta väderdata baserat på koordinater, likt WeatherGraphPage
   const fetchWeatherData = async () => {
     if (!coordinates) return;
     setLoading(true);
-    setError(null); // Återställ felmeddelanden
-
+    setError(null);
     try {
       const params = {
         latitude: coordinates.lat,
         longitude: coordinates.lon,
         start_date: '1950-01-01',
-        end_date: new Date().toISOString().split('T')[0], // Dynamiskt slutdatum
+        end_date: new Date().toISOString().split('T')[0],
         models: ['EC-Earth3P_HR'],
         daily: [
           'temperature_2m_mean',
@@ -62,11 +58,11 @@ const TribeCard: React.FC<TribeCardProps> = () => {
       };
       const url = 'https://climate-api.open-meteo.com/v1/climate';
       const response = await fetch(url, {
-        method: 'POST', // Eller GET beroende på API
+        method: 'POST',
         body: JSON.stringify(params),
       });
       if (!response.ok) {
-        throw new Error(`HTTP-fel! Status: ${response.status}`);
+        throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
       setWeatherData(data.daily as WeatherData);
@@ -77,7 +73,6 @@ const TribeCard: React.FC<TribeCardProps> = () => {
     }
   };
 
-  // Funktion för att hantera favoritmarkering
   const handleFavoriteToggle = () => {
     if (!tribe) return;
     if (isFavorited) {
@@ -88,7 +83,7 @@ const TribeCard: React.FC<TribeCardProps> = () => {
     setIsFavorited(!isFavorited);
   };
 
-  if (!tribe) return <p>Tribe not found</p>; // Fallback om stammen inte hittas
+  if (!tribe) return <p>Tribe not found</p>;
 
   return (
     <div className="tribe-card-container">
@@ -96,16 +91,10 @@ const TribeCard: React.FC<TribeCardProps> = () => {
         <img src={tribe.imageUrl} alt={tribe.name} className="tribe-image" />
         <h3 className="article-title">{tribe.name}</h3>
         <p>{tribe.region}</p>
-
-        {/* Favorite button */}
         <button className={`favorite-button ${isFavorited ? 'favorited' : ''}`} onClick={handleFavoriteToggle}>
           {isFavorited ? '❤️' : '🤍'}
         </button>
-
-        {/* Button to fetch weather data */}
         <button onClick={fetchWeatherData}>Get Weather Data</button>
-
-        {/* Weather Data Display */}
         {loading && <p>Loading weather data...</p>}
         {error && <p className="error-message">Failed to fetch weather data: {error}</p>}
         {weatherData && (
@@ -124,6 +113,8 @@ const TribeCard: React.FC<TribeCardProps> = () => {
 };
 
 export default TribeCard;
+
+
 
 
 

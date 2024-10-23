@@ -1,4 +1,3 @@
-// src/components/TribeInfo.tsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import tribesData from '../data/tribesData';
@@ -23,6 +22,8 @@ const TribeInfo: React.FC = () => {
 };
 
 export default TribeInfo;
+
+
 
 
 

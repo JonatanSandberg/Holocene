@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'; 
-import { useParams, useNavigate, Link } from 'react-router-dom'; 
-import { useFavorites } from '../context/FavoritesContext'; 
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useFavorites } from '../context/FavoritesContext';
 import '../styles/TribeCard.css';
 
-// Import the local images
 import apacheImage from '../assets/apache.jpg';
 import basqueImage from '../assets/basque.jpg';
 import garifunaImage from '../assets/garifuna.jpg';
@@ -15,7 +14,6 @@ const TribeArticle: React.FC = () => {
   const [imageUrl, setImageUrl] = useState<string>('');
   const [isFullArticleLoaded, setIsFullArticleLoaded] = useState(false);
   const navigate = useNavigate();
-
   const { favorites, setFavorites, removeFavorite } = useFavorites();
   const [isFavorited, setIsFavorited] = useState(false);
 
@@ -38,12 +36,19 @@ const TribeArticle: React.FC = () => {
     ];
 
     let cleanedText = text;
-    sectionsToRemove.forEach(section => {
+
+    sectionsToRemove.forEach((section) => {
       const regex = new RegExp(`\\n*${section}\\n.*?(?=\\n==|$)`, 'gs');
       cleanedText = cleanedText.replace(regex, '');
     });
 
+    cleanedText = cleanedText.replace(/==\s*(.*?)\s*==/g, '<strong>$1</strong>');
+
     return cleanedText.trim();
+  };
+
+  const formatArticleText = (text: string) => {
+    return text.split('\n\n').map((paragraph, index) => `<p key="${index}">${paragraph}</p>`).join('');
   };
 
   const fetchTribeArticle = async (name: string) => {
@@ -64,18 +69,23 @@ const TribeArticle: React.FC = () => {
         const page = pages[0];
 
         if (page && page.extract) {
-          const articleText = page.extract.split('\n').filter(paragraph => paragraph.trim() !== '').join('\n\n');
+          const articleText = page.extract
+            .split('\n')
+            .filter((paragraph) => paragraph.trim() !== '')
+            .join('\n\n');
           setArticle(articleText);
-          localStorage.setItem(title, JSON.stringify({ article: articleText, imageUrl: page.thumbnail?.source || '' }));
+          localStorage.setItem(
+            title,
+            JSON.stringify({
+              article: articleText,
+              imageUrl: page.thumbnail?.source || '',
+            })
+          );
         } else {
           setArticle('Ingen information tillgänglig.');
         }
 
-        if (page.thumbnail) {
-          setImageUrl(page.thumbnail.source);
-        } else {
-          setImageUrl(localImages[name] || '');
-        }
+        setImageUrl(page.thumbnail?.source || localImages[name] || '');
       } catch (error) {
         console.error('Error fetching article:', error);
         setArticle('Kunde inte hämta artikel.');
@@ -138,21 +148,33 @@ const TribeArticle: React.FC = () => {
   };
 
   return (
-    <div className="article-parent-container"> {/* Updated Parent Container */}
+    <div className="article-parent-container">
       <div className="article-container">
-        <button onClick={handleBackClick} className="back-button">Tillbaka</button>
-        <button className={`favorite-button ${isFavorited ? 'favorited' : ''}`} onClick={handleFavoriteToggle}>
+        <button onClick={handleBackClick} className="back-button">
+          RETURN
+        </button>
+        <button
+          className={`favorite-button ${isFavorited ? 'favorited' : ''}`}
+          onClick={handleFavoriteToggle}
+        >
           {isFavorited ? '❤️' : '🤍'}
         </button>
         <h2 className="article-title">{tribeName}:</h2>
         {imageUrl && (
-          <img src={imageUrl} alt={`Bild på ${tribeName}`} className="article-image" />
+          <img
+            src={imageUrl}
+            alt={`Bild på ${tribeName}`}
+            className="article-image"
+          />
         )}
-        <div className="article-text">
-          {(isFullArticleLoaded ? fullArticle : article).split('\n\n').map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
-        </div>
+        <div
+          className="article-text"
+          dangerouslySetInnerHTML={{
+            __html: formatArticleText(
+              isFullArticleLoaded ? fullArticle : article
+            ),
+          }}
+        />
         {!isFullArticleLoaded ? (
           <button onClick={handleLearnMoreClick} className="learn-more-button">
             Learn more
@@ -162,15 +184,12 @@ const TribeArticle: React.FC = () => {
             Learn less
           </button>
         )}
-        {/* Link to the weather graph page */}
         <Link to={`/tribe/${tribeName}/weather`} className="weather-graph-link">
           View impact of Climate Changes
         </Link>
       </div>
     </div>
   );
-  
-  
 };
 
 export default TribeArticle;

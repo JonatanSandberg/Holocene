@@ -1,51 +1,42 @@
-/* src/Styles/TribeCard.css */
-
-/* Föräldraelement som centrerar innehållet */
 .article-parent-container {
     display: flex;
-    justify-content: center; /* Centrera horisontellt */
-    align-items: flex-start; /* Justera till toppen för att visa hela innehållet */
-    min-height: 100vh;       /* Minimihöjd för att fylla hela höjden */
-    padding: 20px;           /* Padding för att ge lite utrymme runt innehållet */
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
     margin: 0;
 }
 
-/* Befintlig stil för .article-container */
 .article-container {
     padding: 30px;
     max-width: 500px;
-    width: 100%; /* Använd hela bredden upp till max-bredd */
+    width: 100%;
     height: auto;
-    background-color: rgba(255, 255, 255, 0.9); /* Halvtransparent vit bakgrund för kontrast */
+    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     position: relative;
 }
 
-/* Back button styles */
 .back-button {
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #ff4c4c;
+    background-color: #FF5722;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
+    padding: 10px 20px;
     cursor: pointer;
     font-size: 16px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: background-color 0.3s ease;
     position: absolute;
-    top: 10px;
+    top: 20px;
     left: 10px;
 }
 
 .back-button:hover {
-    background-color: #e64444;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #FFA726;
 }
 
-/* Favorite button styles */
 .favorite-button {
     position: absolute;
     top: 20px;
@@ -73,7 +64,6 @@
     transform: scale(1.3);
 }
 
-/* Article title and image styles */
 .article-title {
     font-size: 2rem;
     margin-bottom: 20px;
@@ -93,7 +83,6 @@
     object-position: top;
 }
 
-/* Article text styles */
 .article-text {
     font-size: 1.1rem;
     line-height: 1.8;
@@ -102,6 +91,7 @@
     margin-bottom: 20px;
     word-wrap: break-word;
     text-align: justify;
+    font-family: 'Merriweather', serif; 
 }
 
 .article-text p {
@@ -113,11 +103,10 @@
     font-size: 1.8rem;
     margin-top: 30px;
     margin-bottom: 20px;
-    color: #333;
+    color: #2C3E50;
     font-weight: bold;
 }
 
-/* Tribe card styles */
 .tribe-card {
     padding: 20px;
     margin: 10px;
@@ -135,49 +124,50 @@
     object-position: center;
 }
 
-/* Learn More and Learn Less button styles */
 .learn-more-button,
 .learn-less-button {
-    padding: 12px 22px;              /* Padding for the buttons */
-    background-color: #007BFF;       /* Primary blue color */
-    color: white;                     /* Text color */
-    border: none;                     /* No border */
-    border-radius: 5px;              /* Rounded corners */
-    font-size: 16px;                  /* Font size */
-    cursor: pointer;                  /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition effects */
-    margin-top: 20px;                 /* Margin on top */
-    display: inline-block;            /* Align as inline-block */
+    padding: 12px 22px;
+    background-color: #73b775;
+    color: rgb(248, 248, 248);
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
+    display: inline-block;
+    margin-right: 5px; 
 }
 
-/* Hover effect for Learn More and Learn Less buttons */
 .learn-more-button:hover,
 .learn-less-button:hover {
-    background-color: #0056b3;       /* Darker blue on hover */
-    transform: scale(1.05);          /* Slight scale up effect */
+    background-color: #81C784;
+    transform: scale(1.05);
 }
 
-/* Weather Graph link styled as a button */
 .weather-graph-link {
-    display: inline-block;            /* Display as inline-block */
-    margin-top: 20px;                /* Space above the button */
-    padding: 10px 20px;              /* Padding for the button */
-    background-color: #01a804;       /* Same primary blue color */
-    color: white;                     /* Text color */
-    border: none;                     /* No border */
-    border-radius: 5px;              /* Rounded corners */
-    font-size: 16px;                  /* Font size */
-    cursor: pointer;                  /* Pointer cursor on hover */
-    text-align: center;               /* Center text */
-    text-decoration: none;            /* Remove underline */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Transition effects */
+    display: inline-block;
+    margin-top: 20px;
+    margin-left: 5px;
+    padding: 10px 20px;
+    background-color: #1b76a0;
+    color: rgb(248, 248, 248);
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Hover effect for Weather Graph link */
 .weather-graph-link:hover {
-    background-color: #0056b3;       /* Darker blue on hover */
-    transform: scale(1.05);          /* Slight scale up effect */
+    background-color: #032434;
+    transform: scale(1.05);
 }
+
+
+
 
 
 

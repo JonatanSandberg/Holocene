@@ -1,4 +1,3 @@
-/*src\pages\NotFound.tsx*/
 import '../styles/NotFound.css';
 import React, { useEffect, useState } from 'react';
 import { Player } from '@lottiefiles/react-lottie-player';
@@ -12,25 +11,19 @@ const NotFoundPage: React.FC = () => {
   const [randomAnimation, setRandomAnimation] = useState(animations[0]);
 
   useEffect(() => {
-    // Randomly select an animation on page load
     const randomIndex = Math.floor(Math.random() * animations.length);
     setRandomAnimation(animations[randomIndex]);
   }, []);
 
   return (
     <div className="error-main">
-      <blockquote className="quote">
-        "It's Not Us, It's YOU!!"
-      </blockquote>
-
-     {/* Display random animation */}
-     <Player
+      <blockquote className="quote">"It's Not Us, It's YOU!!"</blockquote>
+      <Player
         autoplay
         loop
         src={randomAnimation}
         style={{ height: '300px', width: '300px' }}
       />
-
       <Link to="/" className="homeLink">Take Me Home</Link>
     </div>
   );

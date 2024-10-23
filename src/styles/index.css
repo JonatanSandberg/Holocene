@@ -2,11 +2,9 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  color: #7d8a5b;
+  background-color: rgb(37, 33, 33);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -17,12 +15,22 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  text-align: center; /* Center text within the body */
+  text-align: center;
+  font-family: 'Merriweather', serif;
 }
 
 h1 {
+  font-family: 'Raleway', sans-serif;
   font-size: 3.2em;
   line-height: 1.1;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.logo {
+  margin-right: 10px;
 }
 
 @media (prefers-color-scheme: light) {
@@ -32,11 +40,13 @@ h1 {
   }
 }
 
-/* Optional: Center other common elements by default */
-p, a, button {
-  margin: 0; /* Remove default margins */
-  padding: 0; /* Remove default padding */
+p,
+a,
+button {
+  margin: 0;
+  padding: 0;
 }
+
 
 
 
